@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bbs4.mapper.BoardMapper">
+    <insert id="write">
+         insert into board values (
+            board_seq.nextval, -- 글번호
+            #{title}, -- 제목
+            #{content}, -- 내용
+            #{writer}, -- 작성자
+            sysdate, -- 작성일시
+            0, -- 조회수
+            0, -- 추천수
+            #{mno} -- 회원번호
+         )
+     </insert>
+
+    <select id="select" resultType="com.example.bbs4.domain.Board">
+        select *
+        from board
+        where bno = #{bno}
+    </select>
+
+
+    <update id="count">
+        update board
+        set count = count +1
+        where bno = #{bno}
+    </update>
+
+    <update id="reco">
+        update board
+        set reco = reco + 1
+        where bno = #{bno}
+    </update>
+
+    <delete id="delete">
+        delete from board
+        where bno = #{bno}
+    </delete>
+
+    <update id="update">
+        update board
+        set
+            title = #{title},
+            content = #{content},
+            writer = #{writer}
+            where bno = #{bno}
+    </update>
+
+    <insert id="reply">
+        insert into reply values(
+            reply_seq.nextval,
+            #{rcontent},
+            #{rwriter},
+            sysdate,
+            0,
+            0,
+            #{bno},
+            #{mno}
+        )
+    </insert>
+
+
+
+    <update id="up">
+        update reply set up = up + 1
+        where bno = #{bno} and
+        rno = #{rno}
+    </update>
+
+    <update id="down">
+        update reply set down = down + 1
+        where bno = #{bno} and
+        rno = #{rno}
+    </update>
+
+    <select id="boardListCnt" resultType="int">
+        select count(*) from board
+    </select>
+
+    <select id="boardList" resultType="com.example.bbs4.domain.Board">
+        select *
+from  (select row_number() over (order by regDate desc) ronum,bno, title, content, writer,
+            regDate, count, reco
+from board)
+where ronum between #{rowStart} and #{rowEnd}
+order by bno desc
+    </select>
+
+    <select id="replyListCnt" resultType="int">
+        select count(*)  from reply
+        where bno = #{bno}
+    </select>
+
+
+    <select id="replyList" resultType="com.example.bbs4.domain.Reply">
+        select *
+        from  (select row_number() over (order by regDate desc) ronum,
+                rno, rcontent, rwriter, regDate, up, down, bno, mno
+                from reply)
+        where ronum between #{rowStart} and #{rowEnd} and bno = #{bno}
+        order by regDate desc
+    </select>
+</mapper>
