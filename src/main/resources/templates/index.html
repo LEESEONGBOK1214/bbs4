@@ -101,6 +101,25 @@
                 아이디<input type="text" id="joinId" placeholder="아이디를 입력해주세요." class="form-control"><br>
                 비밀번호<input type="password" id="joinPW" placeholder="비밀번호를 입력해주세요." class="form-control"><br>
                 이름<input type="text" id="name" placeholder="이름을 입력해주세요." class="form-control"><br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-10" >
+                            <input type="text" id="email" class="form-control" placeholder="이메일을 입력해주세요.">
+                        </div>
+                        <div class="col-2" style="margin: auto;">
+                            <button class="btn btn-primary" style="font-size:10px;" id="sendEmail" >전송</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="text" placeholder="인증번호 8자리를 입력해주세요." id="confirmCode" class="form-control">
+                        </div>
+                        <div class="col-2" style=" margin: auto;">
+                            <button class="btn btn-primary" style="font-size:10px;" id="confirm" >인증</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="join">회원가입</button>

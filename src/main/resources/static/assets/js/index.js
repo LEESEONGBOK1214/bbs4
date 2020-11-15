@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    function setBgColor() {
+
         let color = '';
         let temp;
         for (let i = 0; i < 6; i++) {
@@ -35,13 +35,17 @@ $(document).ready(function () {
 
         console.log(color);
         $('#header').css("background-color", '#'+color);
-    }
+
 
 
     setBgColor();
 
     $('#join').on('click', function () {
         console.log('회원가입 눌림!');
+        if($('#confirm').hasClass('emailSuccess') === false){
+            alert('이메일 인증을 마쳐주세요')
+            return false;
+        }
         let data = {
             // let : var-> 전역함수로 인식.
             // var을 대체하기 위해 나옴.
@@ -230,7 +234,53 @@ $(document).ready(function () {
     });
 
 
+    // 이메일 전송 버튼 클릭
+    $('#sendEmail').on('click', function (){
 
+        let data = {
+            userEmail : $('#email').val(),
+        }
+        if (!data.userEmail){
+            alert('이메일을 입력해 주세요!');
+            return;
+        }
+
+        // alert(data.userEmail);
+
+        $.ajax({
+            data : data,
+            type : 'post',
+            url : '/rest/email',
+            success : function (){
+                alert('이메일을 확인해주세요!');
+            }
+        })
+    });
+
+    //  인증 버튼 클릭
+    $('#confirm').on('click', function (){
+
+        let data = {
+            userEmail : $('#confirmCode').val(),
+        }
+        if (!data.userEmail){
+            alert('인증번호를 입력해 주세요!');
+            return;
+        }
+
+        alert(data.userEmail);
+
+        $.ajax({
+            data : data,
+            type : 'post',
+            url : '/rest/confirm',
+            success : function (){
+                alert('인증에 성공하였습니다!');
+                $('#confirm').addClass('emailSuccess');
+                $('#confirm').prop("disabled", true);
+            }
+        })
+    });
 
 });
 

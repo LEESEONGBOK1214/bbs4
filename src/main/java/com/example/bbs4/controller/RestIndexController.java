@@ -1,9 +1,11 @@
 package com.example.bbs4.controller;
 
 import com.example.bbs4.domain.Board;
+import com.example.bbs4.domain.Email;
 import com.example.bbs4.domain.Member;
 import com.example.bbs4.domain.Reply;
 import com.example.bbs4.service.BoardService;
+import com.example.bbs4.service.EmailService;
 import com.example.bbs4.service.MemberService;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class RestIndexController {
     MemberService memberService;
     @Autowired
     BoardService boardService;
+    @Autowired
+    EmailService emailService;
 
     // 회원가입
     @PostMapping("/rest/join")
@@ -71,13 +75,33 @@ public class RestIndexController {
         boardService.reply(reply);
     }
 
+    // 댓글 추천
     @PutMapping("/rest/up")
     public void up(Reply reply){
         boardService.up(reply);
     }
 
+    // 댓글 비추
     @PutMapping("/rest/down")
     public void down(Reply reply){
         boardService.down(reply);
     }
+
+    //메일 전송
+    @PostMapping("/rest/email")
+    public void sendEmail(Email email) throws Exception{
+        emailService.sendSimpleMessage(email.getUserEmail());
+    }
+
+    // 인증 코드 확인
+    @PostMapping("/rest/confirm")
+    public int confirm(Email email) {
+        if(EmailService.ePw.equals(email.getConfirm())){
+            return EmailService.CONFIRM;
+        }else{
+            return EmailService.REJECT;
+        }
+
+    }
+
 }
