@@ -1,48 +1,46 @@
 $(document).ready(function () {
 
 
-        let color = '';
-        let temp;
-        for (let i = 0; i < 6; i++) {
-            temp = Math.random() * 16;
-            temp = temp.toFixed(0);
-            if (temp >= 10) {
+    let color = '';
+    let temp;
+    for (let i = 0; i < 6; i++) {
+        temp = Math.random() * 16;
+        temp = temp.toFixed(0);
+        if (temp >= 10) {
 
-                switch (temp) {
-                    case '10':
-                        temp = 'a';
-                        break;
-                    case '11':
-                        temp = 'b';
-                        break;
-                    case '12':
-                        temp= 'c';
-                        break;
-                    case '13':
-                        temp= 'd';
-                        break;
-                    case '14':
-                        temp= 'e';
-                        break;
-                    case '15':
-                        temp= 'f';
-                        break;
-                }// end of switch
-            } // end of if temp >= 10
+            switch (temp) {
+                case '10':
+                    temp = 'a';
+                    break;
+                case '11':
+                    temp = 'b';
+                    break;
+                case '12':
+                    temp = 'c';
+                    break;
+                case '13':
+                    temp = 'd';
+                    break;
+                case '14':
+                    temp = 'e';
+                    break;
+                case '15':
+                    temp = 'f';
+                    break;
+            }// end of switch
+        } // end of if temp >= 10
 
-            color += temp;
-        }
+        color += temp;
+    }
 
-        console.log(color);
-        $('#header').css("background-color", '#'+color);
+    console.log(color);
+    $('#header').css("background-color", '#' + color);
 
-
-
-    setBgColor();
 
     $('#join').on('click', function () {
-        console.log('회원가입 눌림!');
-        if($('#confirm').hasClass('emailSuccess') === false){
+        // console.log('회원가입 눌림!');
+        // alert('회원가입해!');
+        if ($('#confirm').hasClass('emailSuccess') === false) {
             alert('이메일 인증을 마쳐주세요')
             return false;
         }
@@ -69,7 +67,8 @@ $(document).ready(function () {
     });
 
     $('#login').on('click', function () {
-        console.log('로그인클릭!');
+        // console.log('로그인클릭!');
+        // alert('로그인해!');
         let data = {
             id: $('#loginId').val(),
             password: $('#loginPW').val()
@@ -148,17 +147,17 @@ $(document).ready(function () {
     }); // end of writeDelete on click
 
     // 글 추천 클릭
-    $('#reco').on('click', function (){
+    $('#reco').on('click', function () {
         console.log('추천 클릭!');
 
         let data = {
-            bno : $('#bno').val()
+            bno: $('#bno').val()
         }
         $.ajax({
-            data : data,
-            type : 'put',
-            url : '/rest/reco',
-            success : function (){
+            data: data,
+            type: 'put',
+            url: '/rest/reco',
+            success: function () {
                 alert('추천!');
                 window.location.href = '/select/' + data.bno;
             }
@@ -166,81 +165,81 @@ $(document).ready(function () {
     });
 
     // 글 삭제 버튼
-    $('#delete').on('click', function (){
+    $('#boardDelete').on('click', function () {
         let data = {
-            bno : $('#bno').val()
+            bno: $('#bno').val()
         }
 
         $.ajax({
-            data : data,
-            type : 'delete',
-            url : '/rest/delete',
-            success : function (){
+            data: data,
+            type: 'delete',
+            url: '/rest/boardDelete',
+            success: function () {
                 alert('삭제 완료!');
-                window.location.href='/';
+                window.location.href = '/';
             }
         })
     });
 
     // 글 수정 버튼
-    $('#updateBtn').on('click', function (){
+    $('#updateBtn').on('click', function () {
         let bno = $('#bno').val();
-       window.location.href = '/update/' + bno;
+        window.location.href = '/update/' + bno;
     });
 
     // 글 수정 완료
-    $('#update').on('click', function (){
+    $('#update').on('click', function () {
         let data = {
-            title : $('#title').val(),
-            content : $('#content').val(),
-            writer : $('#writer').val(),
-            bno : $('#bno').val(),
+            title: $('#title').val(),
+            content: $('#content').val(),
+            writer: $('#writer').val(),
+            bno: $('#bno').val(),
         }
 
         $.ajax({
-            data : data,
-            type : 'put',
-            url : '/rest/update',
-            success : function (){
+            data: data,
+            type: 'put',
+            url: '/rest/update',
+            success: function () {
                 alert('수정 완료!');
-                window.location.href='/select/' + data.bno;
+                window.location.href = '/select/' + data.bno;
             }
         })
     });
 
 
     // 댓글 버튼 클릭
-    $('#replyBtn').on('click', function (){
-       let data = {
-           rcontent : $('#rcontent').val(),
-           rwriter : $('#rwriter').text(),
-           mno : $('#mno').val(),
-           bno : $('#bno').val()
-       }
+    $('#replyBtn').on('click', function () {
+        let data = {
+            rcontent: $('#rcontent').val(),
+            rwriter: $('#rwriter').text(),
+            mno: $('#mno').val(),
+            bno: $('#bno').val()
+        }
 
-       // alert(
-       //     'rcontent : ' + $('#rcontent'),
-       //     'rwriter'
-       // );
+        // alert(
+        //     'rcontent : ' + $('#rcontent'),
+        //     'rwriter'
+        // );
 
-       $.ajax({
-            data : data,
-           type : 'post',
-           url : '/rest/reply',
-           success : function (){
-               location.reload();
-           }
-       })
+        $.ajax({
+            data: data,
+            type: 'post',
+            url: '/rest/reply',
+            success: function () {
+                location.reload();
+            }
+        })
     });
 
 
     // 이메일 전송 버튼 클릭
-    $('#sendEmail').on('click', function (){
+    $('#sendEmail').on('click', function () {
 
         let data = {
-            userEmail : $('#email').val(),
+            userEmail: $('#email').val(),
         }
-        if (!data.userEmail){
+        if (!data.userEmail) {
             alert('이메일을 입력해 주세요!');
             return;
         }
@@ -248,22 +247,22 @@ $(document).ready(function () {
         // alert(data.userEmail);
 
         $.ajax({
-            data : data,
-            type : 'post',
-            url : '/rest/email',
-            success : function (){
+            data: data,
+            type: 'post',
+            url: '/rest/email',
+            success: function () {
                 alert('이메일을 확인해주세요!');
             }
         })
     });
 
     //  인증 버튼 클릭
-    $('#confirm').on('click', function (){
+    $('#confirm').on('click', function () {
 
         let data = {
-            userEmail : $('#confirmCode').val(),
+            userEmail: $('#confirmCode').val(),
         }
-        if (!data.userEmail){
+        if (!data.userEmail) {
             alert('인증번호를 입력해 주세요!');
             return;
         }
@@ -271,10 +270,10 @@ $(document).ready(function () {
         alert(data.userEmail);
 
         $.ajax({
-            data : data,
-            type : 'post',
-            url : '/rest/confirm',
-            success : function (){
+            data: data,
+            type: 'post',
+            url: '/rest/confirm',
+            success: function () {
                 alert('인증에 성공하였습니다!');
                 $('#confirm').addClass('emailSuccess');
                 $('#confirm').prop("disabled", true);
@@ -282,38 +281,58 @@ $(document).ready(function () {
         })
     });
 
+    // 멤버 삭제 버튼
+    $('#memberDelete').on('click', function () {
+        alert('멤버 삭제 버튼 클릭!');
+        let data = {
+            mno : $('#memberDelete').attr('name')
+        }
+        // alert('데이타' + data.mno) ;
+
+        $.ajax({
+            data: data,
+            type: 'delete',
+            url: '/rest/memberDelete',
+            success: function () {
+                alert('삭제 완료!');
+                window.location.href = '/memberList';
+            }
+        })
+    });
+
+    //doc 끝
 });
 
 
 // 댓글 추천
-function up(_rno){
-    let data= {
-        bno : $('#bno').val(),
-        rno : _rno,
+function up(_rno) {
+    let data = {
+        bno: $('#bno').val(),
+        rno: _rno,
     }
 
     $.ajax({
-        data : data,
-        type : 'put',
-        url : '/rest/up',
-        success : function (){
+        data: data,
+        type: 'put',
+        url: '/rest/up',
+        success: function () {
             location.reload();
         }
     })
 };
 
 // 댓글 비추
-function down(_rno){
-    let data= {
-        rno : _rno,
-        bno : $('#bno').val(),
+function down(_rno) {
+    let data = {
+        rno: _rno,
+        bno: $('#bno').val(),
     }
 
     $.ajax({
-        data : data,
-        type : 'put',
-        url : '/rest/down',
-        success : function (){
+        data: data,
+        type: 'put',
+        url: '/rest/down',
+        success: function () {
             location.reload();
         }
     })

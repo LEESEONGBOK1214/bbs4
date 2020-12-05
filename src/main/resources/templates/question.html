@@ -10,7 +10,7 @@
 <!--<div th:replace="layout/layout :: header"></div>-->
 <div id="main">
     <section class="two">
-        <h1>글작성</h1>
+        <h1>문의작성</h1>
         <br>
         <div class="container">
             <div class="input-group input-group-lg">
@@ -20,16 +20,16 @@
                 <input type="text" class="form-control" aria-label="Sizing example input"
                        aria-describedby="inputGroup-sizing-lg" id="title">
             </div>
-            <br><br><br>
+            <br><br>
 
             <div class="input-group input-group-lg">
                 <div class="input-group-prepend">
                     <span class="input-group-text">내용</span>
                 </div>
                 <textarea class="form-control" aria-label="Sizing example input"
-                          aria-describedby="inputGroup-sizing-lg" id="content"></textarea>
+                          aria-describedby="inputGroup-sizing-lg"  id="content"></textarea>
             </div>
-            <br><br><br>
+            <br><br>
 
             <div class="input-group input-group-lg">
                 <div class="input-group-prepend">
@@ -38,18 +38,25 @@
                 <input type="text" class="form-control" aria-label="Sizing example input"
                        aria-describedby="inputGroup-sizing-lg" th:value="${session.user.name}" id="writer">
             </div>
-            <br><br><br>
+            <br><br>
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">이메일</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-lg"  id="email">
+            </div>
+            <br>
 
             <div style="float:right">
-                <button id="write" class="btn btn-primary">완료</button>
-                <button id="back" class="btn btn-danger">뒤로</button>
+                <button id="questionWrite" class="btn btn-success">완료</button>
+                <button id="back" class="btn btn-info">뒤로</button>
             </div>
         </div>
     </section>
 </div>
 <input type="hidden" th:value="${session.user.mno}" id="mno">
 <div th:replace="layout/layout :: footer"></div>
-
 </body>
-
 </html>

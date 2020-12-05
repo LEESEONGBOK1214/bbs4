@@ -8,7 +8,7 @@
 		<version>2.3.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.cuteblog</groupId>
 	<artifactId>bbs4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bbs4</name>

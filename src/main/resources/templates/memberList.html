@@ -4,7 +4,12 @@
 	웃 폴더의 레이아웃의 header를 들고옴-->
 </head>
 <body class="is-preload">
-<div th:replace="layout/layout :: header"></div>
+<div th:replace="layout/layout :: topbar"></div>
+<div th:replace="layout/layout :: loginCheck"></div>
+
+<!--<div th:replace="layout/layout :: header"></div>-->
+
+
 <div id="main">
     <section class="two">
         <h1>유저 목록</h1>
@@ -18,6 +23,7 @@
                         <th>이름</th>
                         <th>타입</th>
                         <th>생성일</th>
+                        <th colspan="2" style="">관리</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +33,8 @@
                         <th th:text="${memberList.name}"></th>
                         <th th:text="${memberList.type}"></th>
                         <th th:text="${#dates.format(memberList.regDate, 'yyyy-MM-dd HH:m m:ss')}"></th>
+                        <th><a href="" id="memberDelete" th:name="${memberList.mno}"><div style="background: #706ff3">삭제</div></a></th>
+                        <th><div style="background-color: #706ff3">수정</div></th>
                     </tr>
                 </tbody>
             </table>

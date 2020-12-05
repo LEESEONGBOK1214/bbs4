@@ -20,70 +20,52 @@
     <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/index.js"></script>
+    <link rel="shortcut icon" type="image⁄x-icon" href="아이콘 파일 주소">
+
 </head>
+<script th:if="${session.user == null}" th:fragment="loginCheck">
+    alert('로그인 해주세요');
+    location.href='/';
+</script>
 <body class="is-preload">
 
-<!-- Header -->
-<div id="header" th:fragment="header">
 
-    <div class="top">
+<div th:fragment="topbar" class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+        <!-- ################################################################################################ -->
 
-        <!-- Logo -->
-        <div id="logo">
-            <div th:if="${session.user == null}">
-                <h1>로그인 해주세요.</h1>
-                <p></p>
-            </div>
-            <div th:unless="${session.user == null}">
-                <h1 th:text="${session.user.name}+'님'"></h1>
-                <p th:text="${#dates.format(session.user.regDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
-            </div>
+        <ul class="nospace" th:if="${session.user == null}">
+            <li><a href="/"><i class="fa fa-lg fa-home"></i></a></li>
+            <li><a href="/question" title="Help Centre">고객센터</a></li>
+            <li><a href="#" id="top-link" data-toggle="modal" data-target="#loginBtn">로그인</a></li>
+            <li><a href="#" id="portfolio-link" data-toggle="modal" data-target="#joinBtn">회원가입</a></li>
+        </ul>
+        <ul class="nospace" th:unless="${session.user == null}">
+            <li><a href="/"><i class="fa fa-lg fa-home"></i></a></li>
+            <li><a href="/question" title="Help Centre">고객센터</a></li>
+            <li><a href="/logout">로그아웃</a></li>
+            <li th:if="${session.user.getType().equals('관리자')}"><a href="/memberList">회원목록</a></li>
+            <li><a href="/write">글쓰기</a></li>
+            <li th:text="${#dates.format(session.user.regDate, 'yyyy-MM-dd HH:mm:ss')}"  style="position: absolute;right: 0"></li>
+            <li th:text="${session.user.name}+'님'" style="position: absolute;right: 200px"></li>
+<!--            <h1 th:text="${session.user.name}+'님'"></h1>-->
+
+        </ul>
+        <!-- ################################################################################################ -->
+        <div th:unless="${session.user == null}">
 
         </div>
-
-        <!-- Nav -->
-        <nav id="nav">
-            <div th:if="${session.user==null}">
-                <ul>
-                    <li><a href="#" id="top-link" data-toggle="modal" data-target="#loginBtn">로그인</a></li>
-                    <li><a href="#" id="portfolio-link" data-toggle="modal" data-target="#joinBtn">회원가입</a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-            </div>
-            <div th:unless="${session.user==null}">
-                <ul>
-                    <li><a href="/">홈</a></li>
-                    <li><a href="/logout">로그아웃</a></li>
-                    <li><a href="/memberList">회원목록</a></li>
-                    <li><a href="/write">글쓰기</a></li>
-                </ul>
-            </div>
-        </nav>
     </div>
 
-    <div class="bottom">
 
-        <!-- Social Icons -->
-        <ul class="icons">
-            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-            <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-        </ul>
-
-    </div>
-
-</div> <!-- header-->
-
+</div>
 
 <div id="footer" th:fragment="footer">
 
     <!-- Copyright -->
     <ul class="copyright">
         <li>&copy; Untitled. All rights reserved.</li>
-        <li>Design: 이성복</li>
+        <li>Design: 이성복 이메일 : dltjdqhr1000@gmail.com</li>
     </ul>
 
 </div><!-- Footer -->
