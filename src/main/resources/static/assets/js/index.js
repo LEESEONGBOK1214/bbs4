@@ -286,24 +286,12 @@ $(document).ready(function () {
         })
     });
 
-    // 멤버 삭제 버튼
-    // $('.memberDelete').on('click', function () {
-    //     alert('멤버 삭제 버튼 클릭!');
-    //     let data = {
-    //         mno : $('.memberDelete').attr('name'),
-    //     }
-    //     alert('데이타' + data.mno) ;
-    //
-    //     $.ajax({
-    //         data: data,
-    //         type: 'delete',
-    //         url: '/rest/memberDelete',
-    //         success: function () {
-    //             alert('삭제 완료!');
-    //             window.location.href = '/memberList';
-    //         }
-    //     })
-    // });
+    // alert("url : "+$(location).attr('href'));
+    // alert($('body').innerHTML);
+    // if($('body').innerHTML =='"redirect:/memberList"'){
+    //     // alert('아니 왜 안돼');
+    //     window.location('/memberList');
+    // }
 
     //doc 끝
 });

@@ -115,5 +115,9 @@ order by bno desc
          )
      </insert>
 
+    <delete id="replyDelete">
+        delete from member
+        where mno = #{rno}
+    </delete>
 
 </mapper>

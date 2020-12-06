@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @RestController
 public class RestIndexController {
@@ -102,10 +104,18 @@ public class RestIndexController {
 
     // 유저삭제
     @GetMapping("/rest/memberDelete/{mno}")
-    public String memberDelete(@PathVariable long mno){
-        System.out.println(mno);
+    public void memberDelete(@PathVariable long mno, HttpServletResponse response) throws IOException {
+//        System.out.println(mno);
         memberService.memberDelete(mno);
-        return "redirect:/memberList";
+        response.sendRedirect("/memberList");
     }
+
+//    // 댓글 삭제
+//    @GetMapping("/rest/replyDelete/{rno}")
+//    public String replyDelete(@PathVariable long rno){
+////        System.out.println(mno);
+//        memberService.memberDelete(rno);
+//        return "redirect:/memberList";
+//    }
 
 }
