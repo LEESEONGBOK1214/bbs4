@@ -220,6 +220,11 @@ br.clear {
     margin: 0 auto;
     max-width: 100%;
     width: 1400px;
+
+}
+
+.two .container{
+    min-height: 600px;
 }
 
 @media screen and (min-width: 961px) and (max-width: 1880px) {
@@ -2663,4 +2668,8 @@ a:hover {
 
 .page-link {
     color: black !important;
+}
+
+#joinBtn{
+    max-height: 600px;
 }

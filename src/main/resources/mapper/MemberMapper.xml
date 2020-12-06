@@ -20,7 +20,7 @@
     </select>
 
     <select id="memberList" resultType="com.cuteblog.bbs4.domain.Member">
-        select * from member
+        select * from member order by mno
     </select>
 
 

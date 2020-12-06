@@ -32,9 +32,9 @@
                         <th th:text="${memberList.id}"></th>
                         <th th:text="${memberList.name}"></th>
                         <th th:text="${memberList.type}"></th>
-                        <th th:text="${#dates.format(memberList.regDate, 'yyyy-MM-dd HH:m m:ss')}"></th>
-                        <th><a href="" id="memberDelete" th:name="${memberList.mno}"><div style="background: #706ff3">삭제</div></a></th>
-                        <th><div style="background-color: #706ff3">수정</div></th>
+                        <th th:text="${#dates.format(memberList.regDate, 'yyyy-MM-dd HH:mm:ss')}"></th>
+                        <th><a th:href="@{'/rest/memberDelete/' + ${memberList.mno}}"><div  style="background: #706ff3" class="memberDelete">삭제</div> </a></th>
+
                     </tr>
                 </tbody>
             </table>

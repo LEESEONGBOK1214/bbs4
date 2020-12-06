@@ -12,7 +12,7 @@
 <div id="main">
     <section class="two">
         <div class="container">
-            <h1>게시글 열람</h1><br><br>`
+
             <div style="float: right;">
                 조회수&emsp;<span th:text="${select.count}"></span>&emsp;&emsp;&emsp;
                 추천수&emsp;<span th:text="${select.reco}" id="recos"></span>&emsp;&emsp;&emsp;
@@ -70,9 +70,9 @@
                         <input type="hidden" th:value="${replyList.rno}" id="rno">
                     </div>
                     <br>
-                    <div th:text="${replyList.rcontent}"></div>
+                    <div style="min-width: 800px" th:text="${replyList.rcontent}"></div>
                     <br><br>
-                    <div style="float: right">
+                    <div style="float: right;">
                         <span th:text="${#dates.format(replyList.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span><br>
                         <a href="" th:onclick="'javascript:up('+${replyList.rno}+')'"><span
                                 class="badge badge-primary badge-pill" id="upBtn">추천</span></a>
@@ -80,41 +80,6 @@
                                 class="badge badge-danger badge-pill" id="downBtn">비추</span></a>
                     </div>
                     <h1></h1>
-                </li>
-            </ul>
-        </div>
-
-        <!-- paging button-->
-        <div style="display: inline-block" aria-label="Page navigation example ">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" th:href="@{?page=1}" aria-label="Previous">
-                        <span aria-hidden="true">처음</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.prevBlock})}"
-                       aria-label="Previous">
-                        <span aria-hidden="true">이전</span>
-                    </a>
-                </li>
-                <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
-                    <li class="page-item"
-                        th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
-                        th:each="pageButton : ${#numbers.sequence(start, end)}">
-                        <a class="page-link" th:href="@{?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
-                    </li>
-                </th:block>
-                <li class="page-item">
-                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
-                        <span aria-hidden="true">다음</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}"
-                       aria-label="Previous">
-                        <span aria-hidden="true">끝</span>
-                    </a>
                 </li>
             </ul>
         </div>

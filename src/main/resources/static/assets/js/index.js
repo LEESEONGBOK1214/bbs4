@@ -33,10 +33,12 @@ $(document).ready(function () {
         color += temp;
     }
 
-    console.log(color);
+    // console.log(color);
+    // alert('index.js 로딩');
     $('#header').css("background-color", '#' + color);
 
 
+    //회원가입
     $('#join').on('click', function () {
         // console.log('회원가입 눌림!');
         // alert('회원가입해!');
@@ -66,6 +68,7 @@ $(document).ready(function () {
         });
     });
 
+    // 로그인
     $('#login').on('click', function () {
         // console.log('로그인클릭!');
         // alert('로그인해!');
@@ -90,6 +93,7 @@ $(document).ready(function () {
         window.location.href = "/";
     });
 
+    // 글 쓰기
     $('#write').on('click', function () {
         let data = {
             title: $('#title').val(),
@@ -109,6 +113,7 @@ $(document).ready(function () {
         });
     });// end of write on click
 
+    // 글 수정
     $('#writeModify').on('click', function () {
         console.log('글 수정 클릭!!');
         let data = {
@@ -126,7 +131,7 @@ $(document).ready(function () {
         });
     }); // end of writeModify on click
 
-    // 글 수정`
+    // 글 삭제
     $('#writeDelete').on('click', function () {
         console.log('글 삭제 클릭!!');
         let data = {
@@ -267,7 +272,7 @@ $(document).ready(function () {
             return;
         }
 
-        alert(data.userEmail);
+        // alert(data.userEmail);
 
         $.ajax({
             data: data,
@@ -282,23 +287,23 @@ $(document).ready(function () {
     });
 
     // 멤버 삭제 버튼
-    $('#memberDelete').on('click', function () {
-        alert('멤버 삭제 버튼 클릭!');
-        let data = {
-            mno : $('#memberDelete').attr('name')
-        }
-        // alert('데이타' + data.mno) ;
-
-        $.ajax({
-            data: data,
-            type: 'delete',
-            url: '/rest/memberDelete',
-            success: function () {
-                alert('삭제 완료!');
-                window.location.href = '/memberList';
-            }
-        })
-    });
+    // $('.memberDelete').on('click', function () {
+    //     alert('멤버 삭제 버튼 클릭!');
+    //     let data = {
+    //         mno : $('.memberDelete').attr('name'),
+    //     }
+    //     alert('데이타' + data.mno) ;
+    //
+    //     $.ajax({
+    //         data: data,
+    //         type: 'delete',
+    //         url: '/rest/memberDelete',
+    //         success: function () {
+    //             alert('삭제 완료!');
+    //             window.location.href = '/memberList';
+    //         }
+    //     })
+    // });
 
     //doc 끝
 });

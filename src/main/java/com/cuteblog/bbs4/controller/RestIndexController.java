@@ -3,15 +3,11 @@ package com.cuteblog.bbs4.controller;
 import com.cuteblog.bbs4.domain.Board;
 import com.cuteblog.bbs4.domain.Email;
 import com.cuteblog.bbs4.domain.Member;
-import com.cuteblog.bbs4.service.EmailService;
-import com.cuteblog.bbs4.service.MemberService;
+import com.cuteblog.bbs4.service.*;
 import com.cuteblog.bbs4.domain.Reply;
-import com.cuteblog.bbs4.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +25,8 @@ public class RestIndexController {
     // 회원가입
     @PostMapping("/rest/join")
     public void join(Member member){
-        System.out.println("restController join() : " + member.toString());
+        memberService.join(member);
+//        System.out.println("restController join() : " + );
     }
 
     // 로그인
@@ -104,9 +101,11 @@ public class RestIndexController {
     }
 
     // 유저삭제
-    @DeleteMapping("/rest/memberDelete")
-    public void memberDelete(long mno){
+    @GetMapping("/rest/memberDelete/{mno}")
+    public String memberDelete(@PathVariable long mno){
+        System.out.println(mno);
         memberService.memberDelete(mno);
+        return "redirect:/memberList";
     }
 
 }

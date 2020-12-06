@@ -27,22 +27,20 @@
     alert('로그인 해주세요');
     location.href='/';
 </script>
+
 <body class="is-preload">
-
-
 <div th:fragment="topbar" class="wrapper row0">
     <div id="topbar" class="hoc clear">
         <!-- ################################################################################################ -->
 
         <ul class="nospace" th:if="${session.user == null}">
             <li><a href="/"><i class="fa fa-lg fa-home"></i></a></li>
-            <li><a href="/question" title="Help Centre">고객센터</a></li>
             <li><a href="#" id="top-link" data-toggle="modal" data-target="#loginBtn">로그인</a></li>
             <li><a href="#" id="portfolio-link" data-toggle="modal" data-target="#joinBtn">회원가입</a></li>
         </ul>
         <ul class="nospace" th:unless="${session.user == null}">
             <li><a href="/"><i class="fa fa-lg fa-home"></i></a></li>
-            <li><a href="/question" title="Help Centre">고객센터</a></li>
+<!--            <li><a href="/question" title="Help Centre">고객센터</a></li>-->
             <li><a href="/logout">로그아웃</a></li>
             <li th:if="${session.user.getType().equals('관리자')}"><a href="/memberList">회원목록</a></li>
             <li><a href="/write">글쓰기</a></li>
